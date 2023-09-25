@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function messagesubit(){
+            var newmessage= document.createElement("div");
+            newmessage.innerHTML = document.getElementById("message").value;
+            newmessage.onclick = removemessage;
+            document.getElementById("messagelist").appendChild(newmessage);
+            savemessage();
+        }
+        function removemessage(){
+            document.getElementById("messageList").removeChild(this);
+            savemessage();
+        }
+        function savemessage(){
+            localStorage.savemessageList = document.getElementById("messageList").innerHTML;
+
+        }
+        function loadmessage(){
+            document.getElementById("messageList").innerHTML = localStorage.savemessageList;
+            for(var i=0; i< messageList.children.length; i++){
+                messageList.children[i].onclick=removemessage;
+            }
+        }
+    </script>
+      <style>
+        body{
+            background-color: pink;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container{
+            width: 500px;
+            height: 700px;
+            background-color: white;
+            border-radius: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #message{
+            margin-top: 50px;
+            width: 350px;
+            height: 200px;
+        }
+        #submit{
+        margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>
+        My page에 오신 것을 환영합니다.
+    </h2>
+    방명록을 작성해주세요</br></br>
+    <div class="container">
+        <input id=message type="text"/><br/>
+        <div class="messageContainer">
+            <input id="submit" type="button" value="입력" onclick="messageSubmit();">
+        </div>
+        <br/><br/>
+        <div id="messageList">
+            <script>
+                if(localStorage.savemessageList){
+                    loadmessage();
+                }
+            </script>
+        </div>
+    </div>
+  
+</body>
+</html>
